@@ -1,6 +1,6 @@
 SELECT * FROM pet;
 
-UPDATE pet SET name = "Zed's Pet" WHERE id in(
+UPDATE pet SET name = "Zed's Pet" WHERE id IN(
 	SELECT pet.id FROM pet, person_pet, person
 	WHERE 
 	person_pet.person_id = person.id AND
