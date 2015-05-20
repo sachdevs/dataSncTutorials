@@ -1,6 +1,8 @@
 import tweepy
 from loginDetails import consumer_key, consumer_secret, access_token, access_token_secret
 import warnings
+import matplotlib
+
 warnings.filterwarnings("ignore")
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
