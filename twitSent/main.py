@@ -1,5 +1,5 @@
 import tweepy
-from loginDetails import consumer_key, consumer_secret, access_token, access_token_secret
+from loginDet import consumer_key, consumer_secret, access_token, access_token_secret
 import warnings
 import matplotlib
 
@@ -15,10 +15,3 @@ for tweet in public_tweets:
     print tweet.text.encode('utf-8')
 
 print '\n\n\n'
-
-user = api.get_user('twitter')
-
-print user.screen_name
-print user.followers_count
-for friend in user.friends():
-   print friend.screen_name
