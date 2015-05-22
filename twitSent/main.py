@@ -10,8 +10,15 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
-public_tweets = api.home_timeline()
-for tweet in public_tweets:
-    print tweet.text.encode('utf-8')
+class StreamListener(tweepy.StreamListener):
+    def on_status(self, status):
+        print(status.text).encode('utf-8')
+    def on_error(self, status_code):
+        if status_code == 420:
+            #returning False in on_data disconnects the stream
+            return False
+        print status_code.encode('utf-8')
 
-print '\n\n\n'
+streamListener = StreamListener()
+stream = tweepy.Stream(auth=api.auth, listener=streamListener)
+(stream.filter(track=[u'basketball'])).encode('utf-8')
