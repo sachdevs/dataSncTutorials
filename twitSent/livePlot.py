@@ -1,19 +1,25 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import time
 
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
 
-def animate(frameno):
-    x = mu + sigma * np.random.randn(10000)
-    n, _ = np.histogram(x, bins, normed=True)
-    for rect, h in zip(patches, n):
-        rect.set_height(h)
-
-mu, sigma = 100, 15
-fig, ax = plt.subplots()
-x = mu + sigma * np.random.randn(10000)
-n, bins, patches = plt.hist(x, 50, normed=1, facecolor='green', alpha=0.75)
-
-ani = animation.FuncAnimation(fig, animate, blit=False, interval=10,
-                              repeat=True)
+def animate(i):
+    pullData = open("data.txt","r").read()
+    dataArray = pullData.split('\n')
+    xar = []
+    yar = []
+    x = 0
+    y = 0
+    for eachLine in dataArray:
+        if len(eachLine)>1:
+            y += (int)(eachLine)
+            x += 1
+            xar.append(int(x))
+            yar.append(int(y))
+    ax1.clear()
+    ax1.plot(xar,yar)
+ani = animation.FuncAnimation(fig, animate, interval=500)
+plt.axis([0, 500, -10, 10])
 plt.show()

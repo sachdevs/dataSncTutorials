@@ -10,9 +10,30 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
+afinn = {}
+file = open('AFINN-111.txt')
+
+for line in file:
+    key, value = line.split('\t')
+    val = (int)(value.replace("\n", ""))
+    afinn[key] = val
+
+def sentimentCalc(tweet):
+    arr = tweet.split(" ")
+    sent = 0
+    for word in arr:
+        if word in afinn:
+            sent += afinn[word]
+    return sent
+
+
 class StreamListener(tweepy.StreamListener):
     def on_status(self, status):
-        print(status.text).encode('utf-8')
+        out = (str)(sentimentCalc((status.text).encode('utf-8')))
+        print out
+        f = open('data.txt', 'a')
+        f.write(out+'\n')
+
     def on_error(self, status_code):
         if status_code == 420:
             #returning False in on_data disconnects the stream
@@ -21,4 +42,5 @@ class StreamListener(tweepy.StreamListener):
 
 streamListener = StreamListener()
 stream = tweepy.Stream(auth=api.auth, listener=streamListener)
-(stream.filter(track=[u'basketball'])).encode('utf-8')
+(stream.filter(track=['life'], languages=["en"])).encode('utf-8')
+#track=[u'obama'], locations=[-180,-90,180,90],
