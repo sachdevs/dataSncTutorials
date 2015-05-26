@@ -31,6 +31,7 @@ class StreamListener(tweepy.StreamListener):
     def on_status(self, status):
         out = (str)(sentimentCalc((status.text).encode('utf-8')))
         print out
+        print (status.text).encode('utf-8')
         f = open('data.txt', 'a')
         f.write(out+'\n')
 
@@ -42,5 +43,5 @@ class StreamListener(tweepy.StreamListener):
 
 streamListener = StreamListener()
 stream = tweepy.Stream(auth=api.auth, listener=streamListener)
-(stream.filter(track=['life'], languages=["en"])).encode('utf-8')
+(stream.filter(track=['rap'], languages=["en"])).encode('utf-8')
 #track=[u'obama'], locations=[-180,-90,180,90],
