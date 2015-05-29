@@ -22,4 +22,4 @@ for url in listing:
             break
         count+=1
     for last in p[count-1:]:
-        print last.contents[len(last)-1].strip().encode('utf-8').decode('ascii', 'ignore')
+        print str(last.contents[len(last)-1].strip().encode('utf-8'))
