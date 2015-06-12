@@ -10,8 +10,8 @@
 # text8: Personals Corpus
 # text9: The Man Who Was Thursday by G . K . Chesterton 1908
 
-from nltk.book import *
 from __future__ import division
+from nltk.book import *
 
 print text1.concordance("monstrous")
 #prints every occurrence of word monstrous in moby dick in context
